@@ -25,5 +25,5 @@ runs:
             SIGNING_KEY_PATH="/tmp/app-private-key.pem" \
             ${{ github.action_path }}/generate_github_access_token.sh)"
       echo "::add-mask::$access_token"
-      echo "access-token=$access_token" >> $GITHUB_ENV
+      echo "access-token=$access_token" >> $GITHUB_OUTPUT
     shell: bash

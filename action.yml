@@ -14,11 +14,13 @@ inputs:
 outputs:
   access-token:
     description: "Access token for the  to use in place of a PAT"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+    value: ${{ steps.generateAccessToken.outputs.access-token }}
 runs:
   using: "composite"
   steps:
-  - run: |
+  - name: Generate Access Token
+    id: generateAccessToken
+    run: |
       echo "${{ inputs.app-private-key }}" > /tmp/app-private-key.pem
       access_token="$(APP_INSTALLATION_ID=${{ inputs.app-installation-id }} \
             APP_ID=${{ inputs.app-id }} \

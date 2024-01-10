@@ -1,0 +1,29 @@
+name: obtain-github-app-installation-access-token
+author: "Nastaliss"
+description: "Obtain a GitHub App installation access token to use in place of a PAT from an application private key"
+inputs:
+  app-id:
+    description: "The ID of the GitHub App"
+    required: true
+  app-installation-id:
+    description: "The installation ID of the GitHub App"
+    required: true
+  app-private-key:
+    description: "The private key of the GitHub App"
+    required: true
+outputs:
+  access-token:
+    description: "Access token for the  to use in place of a PAT"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+  - run: |
+      echo "${{ secrets.app-private-key }}" > /tmp/app-private-key.pem
+      access_token="$(APP_INSTALLATION_ID=${{ inputs.app-installation-id }} \
+            APP_ID=${{ inputs.app-id }} \
+            SIGNING_KEY_PATH="/tmp/app-private-key.pem" \
+            ./generate_github_access_token.sh)"
+      echo "::add-mask::$access_token"
+      echo "access-token=$access_token" >> $GITHUB_ENV
+    shell: bash

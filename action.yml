@@ -19,7 +19,7 @@ runs:
   using: "composite"
   steps:
   - run: |
-      echo "${{ secrets.app-private-key }}" > /tmp/app-private-key.pem
+      echo "${{ inputs.app-private-key }}" > /tmp/app-private-key.pem
       access_token="$(APP_INSTALLATION_ID=${{ inputs.app-installation-id }} \
             APP_ID=${{ inputs.app-id }} \
             SIGNING_KEY_PATH="/tmp/app-private-key.pem" \

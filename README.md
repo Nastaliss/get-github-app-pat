@@ -1,11 +1,11 @@
-# Obtain-github-app-installation-access-token
+# get-github-app-pat
 This github action allows the generation of a Personal Access Token (PAT) for a github application.
 This can be very useful as some interaction requires a PAT, and in an organization you would then need to supply a account-bound PAT. That is problematic as if the user leaves the organization this can cause problems
 
 ## Usage
 To use this action you will need 3 variables. You will need admin access to the organization to install a github application to your org.
 ```
-- uses: Nastaliss/obtain-github-app-installation-access-token@v1
+- uses: Nastaliss/get-github-app-pat@v1
   with:
   # Application's id, see "Getting all the required variables for your app" for more information
   app-id: ''
@@ -55,7 +55,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: Nastaliss/obtain-github-app-installation-access-token@v1
+      - uses: Nastaliss/get-github-app-pat@v1
         id: githubAppAuth
         with:
           app-id: ${{ vars.submodules-app-id }}

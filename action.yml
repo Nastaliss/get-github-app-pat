@@ -1,4 +1,4 @@
-name: obtain-github-app-installation-access-token
+name: get-github-app-pat
 author: "Nastaliss"
 description: "Obtain a GitHub App installation access token to use in place of a PAT from an application private key"
 inputs:
